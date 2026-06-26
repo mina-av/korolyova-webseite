@@ -49,6 +49,15 @@
   function App() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
+    React.useEffect(() => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+      const el = document.getElementById(hash);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 82;
+        window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+      }
+    }, []);
 
     const onNav = (id) => {
       setMobileOpen(false);
