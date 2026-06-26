@@ -10,11 +10,11 @@ const STEPS = [
   ["04", "Подключение"],
 ];
 
-function Network({ onNav }) {
+function Network({ onNav, n = "04" }) {
   return (
     <section id="network" style={{ background: "var(--ink-900)", color: "var(--cream-50)", padding: "var(--section-y) 0" }}>
       <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
-        <KFNumberTag n="04" onDark />
+        <KFNumberTag n={n} onDark />
         <div style={{ display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: 80, alignItems: "start" }} className="kit-network-grid">
           <div>
             <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.1rem, 3.8vw, 3.4rem)",

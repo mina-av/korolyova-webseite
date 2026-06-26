@@ -4,11 +4,11 @@ const { KFNumberTag } = window;
 
 const ABOUT_IMG = "../../tamila_korolyova.png";
 
-function About() {
+function About({ n = "05" }) {
   return (
     <section id="about" style={{ background: "var(--paper)", padding: "var(--section-y) 0" }}>
       <div style={{ maxWidth: "var(--container)", margin: "0 auto", padding: "0 var(--gutter)" }}>
-        <KFNumberTag n="05" />
+        <KFNumberTag n={n} />
         <div style={{ display: "grid", gridTemplateColumns: "0.62fr 0.38fr", gap: 72, alignItems: "center" }} className="kit-about-grid">
           <div>
             <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.4rem, 4.4vw, 4rem)",

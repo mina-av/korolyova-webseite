@@ -1,11 +1,11 @@
-<!-- @dsCard group="Website" viewport="1440x900" name="Лендинг — Тамила Королёва" subtitle="Консультации по недвижимости · реальный контент · интерактив" -->
-<!-- @startingPoint section="Website" subtitle="Лендинг Тамилы Королёвой — недвижимость и строительство" viewport="1440x900" -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Тамила Королёва — Консультации по недвижимости и строительству</title>
+<title>Партнёрская сеть — Тамила Королёва</title>
+<meta name="description" content="Закрытая партнёрская сеть: поставщики, подрядчики, специалисты рынка недвижимости. Более 20 лет проверенных профессиональных связей.">
+<meta property="og:locale" content="ru_RU">
 <link rel="stylesheet" href="../../styles.css">
 <style>
   html { scroll-behavior: smooth; }
@@ -14,8 +14,7 @@
   @media (max-width: 980px) {
     .kit-desktop-nav { display: none !important; }
     .kit-mobile-toggle { display: block !important; }
-    .kit-paths-grid { grid-template-columns: 1fr !important; }
-    .kit-problem-grid, .kit-about-grid, .kit-footer-grid, .kit-form-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .kit-network-grid, .kit-footer-grid, .kit-form-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
 </style>
 </head>
@@ -31,10 +30,8 @@
 
 <script type="text/babel" src="Parts.jsx"></script>
 <script type="text/babel" src="Header.jsx"></script>
-<script type="text/babel" src="Hero.jsx"></script>
-<script type="text/babel" src="Problem.jsx"></script>
-<script type="text/babel" src="Paths.jsx"></script>
-<script type="text/babel" src="About.jsx"></script>
+<script type="text/babel" src="SubHero.jsx"></script>
+<script type="text/babel" src="Network.jsx"></script>
 <script type="text/babel" src="Contact.jsx"></script>
 <script type="text/babel" src="Footer.jsx"></script>
 
@@ -45,7 +42,7 @@
 
     const onNav = (id) => {
       setMobileOpen(false);
-      const el = id === "top" ? document.getElementById("top") : document.getElementById(id);
+      const el = document.getElementById(id);
       if (el) {
         const y = el.getBoundingClientRect().top + window.scrollY - 82;
         window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
@@ -55,10 +52,8 @@
     return (
       <React.Fragment>
         <window.Header onNav={onNav} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-        <window.Hero onNav={onNav} />
-        <window.Problem />
-        <window.Paths />
-        <window.About n="02" />
+        <window.SubHero page="network" />
+        <window.Network onNav={onNav} n="01" />
         <window.Contact />
         <window.Footer onNav={onNav} />
       </React.Fragment>

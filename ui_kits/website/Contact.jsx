@@ -20,7 +20,7 @@ function Contact() {
     <section id="contact" style={{ background: "var(--paper)", padding: "var(--section-y) 0" }}>
       <div style={{ maxWidth: "var(--container)", margin: "0 auto", padding: "0 var(--gutter)" }}>
         <div style={{ maxWidth: 760, marginBottom: 56 }}>
-          <KFSectionHead n="07" heading="Не уверены, с чего начать?"
+          <KFSectionHead heading="Не уверены, с чего начать?"
             intro="Каждая ситуация индивидуальна. Напишите, и я помогу определить подходящий формат." max="18ch" />
         </div>
 

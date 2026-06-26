@@ -1,9 +1,21 @@
 /* global React */
 (function () {
 const COLS = [
-  { title: "Собственникам", target: "owners", items: ["Консультация", "Курс для собственников", "Представление интересов"] },
-  { title: "Строительный бизнес", target: "business", items: ["Самостоятельное изучение", "Первый объект", "Стратегическое партнёрство"] },
-  { title: "Навигация", items: [["Партнёрская сеть", "network"], ["Об авторе", "about"], ["Как начать работу", "process"], ["Записаться на консультацию", "contact"]] },
+  { title: "Собственникам", items: [
+    ["Консультация", "sobstvennikam.html"],
+    ["Курс для собственников", "sobstvennikam.html"],
+    ["Представление интересов", "sobstvennikam.html"],
+  ]},
+  { title: "Строительный бизнес", items: [
+    ["Самостоятельное изучение", "biznes.html"],
+    ["Первый объект", "biznes.html"],
+    ["Стратегическое партнёрство", "biznes.html"],
+  ]},
+  { title: "Навигация", items: [
+    ["Партнёрская сеть", "set.html"],
+    ["Об авторе", "index.html#about"],
+    ["Записаться на консультацию", "#contact"],
+  ]},
 ];
 
 function Footer({ onNav }) {
@@ -25,19 +37,17 @@ function Footer({ onNav }) {
               <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600, letterSpacing: "0.16em",
                 textTransform: "uppercase", color: "var(--brass-400)", margin: "0 0 18px" }}>{c.title}</p>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-                {c.items.map((it) => {
-                  const [label, tgt] = Array.isArray(it) ? it : [it, c.target];
-                  return (
-                    <li key={label}>
-                      <a href={"#" + tgt} onClick={(e) => { e.preventDefault(); onNav(tgt); }}
-                        style={{ fontFamily: "var(--font-sans)", fontSize: 15, color: "rgba(247,242,233,0.8)" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--brass-400)")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.8)")}>
-                        {label}
-                      </a>
-                    </li>
-                  );
-                })}
+                {c.items.map(([label, href]) => (
+                  <li key={label}>
+                    <a href={href}
+                      onClick={href === "#contact" && onNav ? (e) => { e.preventDefault(); onNav("contact"); } : undefined}
+                      style={{ fontFamily: "var(--font-sans)", fontSize: 15, color: "rgba(247,242,233,0.8)", textDecoration: "none" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--brass-400)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.8)")}>
+                      {label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           ))}
@@ -45,7 +55,8 @@ function Footer({ onNav }) {
 
         <div style={{ height: 1, background: "var(--border-on-ink)", margin: "48px 0 0" }} />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, paddingTop: 28 }}>
-          <a href="#" onClick={(e) => e.preventDefault()} style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "rgba(247,242,233,0.55)" }}>
+          <a href="#" onClick={(e) => e.preventDefault()}
+            style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "rgba(247,242,233,0.55)", textDecoration: "none" }}>
             Политика конфиденциальности
           </a>
           <span style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "rgba(247,242,233,0.5)" }}>© Тамила Королёва</span>

@@ -9,12 +9,12 @@ const STEPS = [
   ["04", "Вы получите результат", "Рекомендации, план действий или начало сопровождения."],
 ];
 
-function Process() {
+function Process({ n = "06" }) {
   return (
     <section id="process" style={{ background: "var(--cream-50)", padding: "var(--section-y) 0" }}>
       <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
         <div style={{ marginBottom: 56 }}>
-          <KFSectionHead n="06" heading="Как начать работу" max="20ch" />
+          <KFSectionHead n={n} heading="Как начать работу" max="20ch" />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0,
           borderTop: "1px solid var(--sand-300)" }} className="kit-process-grid">

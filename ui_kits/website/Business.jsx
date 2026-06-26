@@ -2,12 +2,12 @@
 (function () {
 const { KFSectionHead, KFOfferCard } = window;
 
-function Business({ onNav }) {
+function Business({ onNav, n = "03" }) {
   return (
     <section id="business" style={{ background: "var(--cream-50)", padding: "var(--section-y) 0" }}>
       <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
         <div style={{ marginBottom: 60, maxWidth: 880 }}>
-          <KFSectionHead n="03" label="Для предпринимателей и инвесторов"
+          <KFSectionHead n={n} label="Для предпринимателей и инвесторов"
             heading="Программа по созданию и развитию строительного бизнеса"
             intro="Строительство остаётся одной из наиболее востребованных и устойчивых сфер бизнеса. Но опыт не появляется после просмотра уроков и прочтения книг. Он появляется тогда, когда вы начинаете работать с клиентами, подрядчиками, бюджетами, сроками и реальными объектами."
             max="24ch" />

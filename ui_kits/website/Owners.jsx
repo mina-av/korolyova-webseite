@@ -2,12 +2,12 @@
 (function () {
 const { KFSectionHead, KFOfferCard } = window;
 
-function Owners({ onNav }) {
+function Owners({ onNav, n = "02" }) {
   return (
     <section id="owners" style={{ background: "var(--paper)", padding: "var(--section-y) 0" }}>
       <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
         <div style={{ marginBottom: 60 }}>
-          <KFSectionHead n="02" label="Для собственников недвижимости"
+          <KFSectionHead n={n} label="Для собственников недвижимости"
             heading="Выберите формат, который соответствует вашей ситуации"
             intro="Для этого я создала несколько форматов участия." max="22ch" />
         </div>
