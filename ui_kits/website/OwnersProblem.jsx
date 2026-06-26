@@ -30,21 +30,6 @@ function OwnersProblem() {
           </div>
 
           <div>
-            <p style={{ fontFamily: "var(--font-display)", fontWeight: 400,
-              fontSize: "clamp(1.25rem, 1.8vw, 1.65rem)", lineHeight: 1.22,
-              letterSpacing: "-0.01em", color: "var(--ink-900)", margin: "0 0 8px" }}>
-              Вы не обязаны знать всё о строительстве и ремонте.
-            </p>
-            <p style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontWeight: 400,
-              fontSize: "clamp(1.25rem, 1.8vw, 1.65rem)", lineHeight: 1.22,
-              letterSpacing: "-0.01em", color: "var(--stone-500)", margin: "0 0 24px" }}>
-              Это нормально.
-            </p>
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65,
-              color: "var(--ink-800)", margin: "0 0 32px" }}>
-              Но, когда речь идёт о вашем объекте, все ошибки, их исправление и дополнительные расходы оплачиваете именно вы.
-            </p>
-
             <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65,
               color: "var(--ink-800)", margin: "0 0 20px" }}>
               Большинство собственников сталкиваются с одинаковыми вопросами:
