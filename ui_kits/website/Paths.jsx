@@ -1,55 +1,107 @@
 /* global React */
 (function () {
 const { KFSectionHead } = window;
+const { Eyebrow } = window.KorolyovaDesignSystem_d31d2b;
 
 const PATHS = [
-  { label: "Для собственников", title: "Вы — собственник недвижимости", href: "sobstvennikam.html",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" },
-  { label: "Для предпринимателей", title: "Вы создаёте строительный бизнес", href: "biznes.html",
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=80" },
-  { label: "Партнёрство", title: "Закрытая партнёрская сеть", href: "set.html",
-    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80" },
+  {
+    label: "Для собственников",
+    title: "Вы — собственник недвижимости",
+    text: "Планируете строительство, ремонт или реконструкцию. Хотите понимать, что происходит на объекте. Контролировать бюджет, сроки и качество работ. Принимать решения уверенно — и получать результат, который соответствует вашим ожиданиям.",
+    cta: "Перейти",
+    href: "sobstvennikam.html",
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    imageLeft: true,
+  },
+  {
+    label: "Строительный бизнес",
+    title: "Вы создаёте строительный бизнес",
+    text: "Хотите создать устойчивую систему, способную приносить прибыль и развиваться долгие годы. Понимать процессы изнутри. Грамотно работать с клиентами, подрядчиками и поставщиками. Принимать решения, которые помогают бизнесу расти.",
+    cta: "Перейти",
+    href: "biznes.html",
+    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+    imageLeft: false,
+  },
+  {
+    label: "Партнёрская сеть",
+    title: "Закрытая партнёрская сеть",
+    text: "Для тех, кто ценит надёжные деловые связи, профессиональное окружение и проверенные решения. Доступ к поставщикам, подрядчикам, профильным специалистам и специальным условиям сотрудничества.",
+    cta: "Подать заявку",
+    href: "set.html",
+    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
+    imageLeft: true,
+  },
 ];
 
-function PathCard({ p }) {
-  const [h, setH] = React.useState(false);
-  return (
-    <article onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
-      <a href={p.href} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
-        <div style={{ overflow: "hidden", aspectRatio: "4 / 3", background: "var(--sand-200)" }}>
-          <img src={p.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover",
-            filter: "saturate(0.9)", transform: h ? "scale(1.04)" : "scale(1)",
-            transition: "transform var(--dur-slow) var(--ease-out)" }} />
-        </div>
-        <div style={{ paddingTop: 22 }}>
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em",
-            textTransform: "uppercase", color: "var(--brass-600)", margin: 0 }}>{p.label}</p>
-          <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 27, lineHeight: 1.12,
-            letterSpacing: "-0.01em", color: "var(--ink-900)", margin: "12px 0 18px", maxWidth: "16ch" }}>{p.title}</h3>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)",
-            fontSize: 13, fontWeight: 600, letterSpacing: "0.04em",
-            color: h ? "var(--brass-600)" : "var(--ink-900)",
-            transition: "color var(--dur-fast) var(--ease-out)" }}>
-            Перейти
-            <span aria-hidden="true" style={{ transform: h ? "translateX(4px)" : "none",
-              transition: "transform var(--dur-fast) var(--ease-out)" }}>→</span>
-          </span>
-        </div>
+function PathRow({ p }) {
+  const [rowH, setRowH] = React.useState(false);
+  const [linkH, setLinkH] = React.useState(false);
+
+  const imgPanel = (
+    <div style={{ overflow: "hidden", minHeight: 460 }}>
+      <img src={p.img} alt=""
+        style={{ width: "100%", height: "100%", objectFit: "cover",
+          filter: "saturate(0.88) brightness(0.92)",
+          transform: rowH ? "scale(1.04)" : "scale(1)",
+          transition: "transform 600ms var(--ease-out)",
+          display: "block" }} />
+    </div>
+  );
+
+  const textPanel = (
+    <div style={{ background: "var(--paper)",
+      padding: "clamp(48px,8vh,96px) clamp(36px,6vw,80px)",
+      display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <Eyebrow>{p.label}</Eyebrow>
+      <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 400,
+        fontSize: "clamp(1.9rem, 3vw, 2.9rem)", lineHeight: 1.08,
+        letterSpacing: "-0.01em", color: "var(--ink-900)",
+        margin: "20px 0 0", maxWidth: "20ch" }}>
+        {p.title}
+      </h3>
+      <p style={{ fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.7,
+        color: "var(--stone-500)", margin: "24px 0 36px", maxWidth: "42ch" }}>
+        {p.text}
+      </p>
+      <a href={p.href}
+        onMouseEnter={() => setLinkH(true)}
+        onMouseLeave={() => setLinkH(false)}
+        style={{ display: "inline-flex", alignItems: "center", gap: 10,
+          fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600,
+          letterSpacing: "0.04em", textDecoration: "none",
+          color: linkH ? "var(--brass-600)" : "var(--ink-900)",
+          transition: "color var(--dur-fast) var(--ease-out)",
+          alignSelf: "flex-start" }}>
+        {p.cta}
+        <span aria-hidden="true"
+          style={{ transform: linkH ? "translateX(4px)" : "none",
+            transition: "transform var(--dur-fast) var(--ease-out)" }}>→</span>
       </a>
-    </article>
+    </div>
+  );
+
+  return (
+    <div
+      onMouseEnter={() => setRowH(true)}
+      onMouseLeave={() => setRowH(false)}
+      style={{ display: "grid", gridTemplateColumns: "1fr 1fr",
+        borderTop: "1px solid var(--sand-300)" }}
+      className="kit-path-row">
+      {p.imageLeft ? imgPanel : textPanel}
+      {p.imageLeft ? textPanel : imgPanel}
+    </div>
   );
 }
 
 function Paths() {
   return (
-    <section id="puti" style={{ background: "var(--cream-50)", padding: "var(--section-y) 0" }}>
-      <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
-        <div style={{ marginBottom: 60 }}>
-          <KFSectionHead n="01" heading="Выберите путь, который актуален для вас сегодня" max="20ch" />
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 40 }} className="kit-paths-grid">
-          {PATHS.map((p) => <PathCard key={p.href} p={p} />)}
-        </div>
+    <section id="puti" style={{ background: "var(--paper)", padding: "var(--section-y) 0 0" }}>
+      <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto",
+        padding: "0 var(--gutter)", marginBottom: 56 }}>
+        <KFSectionHead n="01" heading="Выберите путь, который актуален для вас сегодня" max="20ch" />
+      </div>
+      <div style={{ borderBottom: "1px solid var(--sand-300)" }}>
+        {PATHS.map((p) => <PathRow key={p.href} p={p} />)}
       </div>
     </section>
   );
