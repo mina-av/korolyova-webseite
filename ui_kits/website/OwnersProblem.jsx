@@ -20,59 +20,47 @@ const GOALS = [
 
 function OwnersProblem() {
   return (
-    <section style={{ background: "var(--cream-50)", padding: "var(--section-y) 0" }}>
+    <section style={{ background: "var(--paper)", padding: "clamp(48px,7vh,80px) 0" }}>
       <div style={{ maxWidth: "var(--container)", margin: "0 auto", padding: "0 var(--gutter)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "0.4fr 0.6fr", gap: 64, alignItems: "start" }}
-          className="kit-problem-grid">
 
-          <div style={{ position: "sticky", top: 120 }}>
-            <Eyebrow>С чего всё начинается</Eyebrow>
-          </div>
+        <p style={{ fontFamily: "var(--font-display)", fontWeight: 400,
+          fontSize: "clamp(1.5rem, 2.4vw, 2.2rem)", lineHeight: 1.18, letterSpacing: "-0.01em",
+          color: "var(--ink-900)", margin: "0 0 36px", maxWidth: "36ch" }}>
+          Большинство собственников сталкиваются с одинаковыми вопросами:
+        </p>
 
-          <div>
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65,
-              color: "var(--ink-800)", margin: "0 0 20px" }}>
-              Большинство собственников сталкиваются с одинаковыми вопросами:
-            </p>
-            <ol style={{ listStyle: "none", counterReset: "q", padding: 0, margin: "0 0 40px" }}>
-              {QUESTIONS.map((q, i) => (
-                <li key={i} style={{ display: "flex", gap: 20, padding: "18px 0",
-                  borderTop: "1px solid var(--sand-300)" }}>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: 18,
-                    color: "var(--brass-600)", lineHeight: 1.4, flex: "none", width: 28 }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span style={{ fontFamily: "var(--font-sans)", fontSize: 17,
-                    lineHeight: 1.5, color: "var(--ink-800)" }}>{q}</span>
-                </li>
-              ))}
-            </ol>
+        <ol style={{ listStyle: "none", padding: 0, margin: "0 0 40px",
+          borderTop: "1px solid var(--sand-300)" }}>
+          {QUESTIONS.map((q, i) => (
+            <li key={i} style={{ display: "flex", gap: 20, padding: "14px 0",
+              borderBottom: "1px solid var(--sand-300)" }}>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: 16,
+                color: "var(--brass-600)", lineHeight: 1.5, flex: "none", width: 28 }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 16,
+                lineHeight: 1.55, color: "var(--ink-800)" }}>{q}</span>
+            </li>
+          ))}
+        </ol>
 
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65,
-              color: "var(--ink-800)", margin: "0 0 8px" }}>
-              И здесь часто происходит подмена понятий — что собственник становится заложником мастеров и обязан всё терпеть и оплачивать.
-            </p>
-            <p style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontWeight: 400,
-              fontSize: "clamp(1.2rem, 1.6vw, 1.5rem)", lineHeight: 1.3,
-              color: "var(--ink-900)", margin: "0 0 32px" }}>
-              Но это не так. И вот с этим предлагаю разобраться.
-            </p>
+        <p style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontWeight: 400,
+          fontSize: "clamp(1.2rem, 1.8vw, 1.65rem)", lineHeight: 1.25,
+          color: "var(--ink-900)", margin: "0 0 28px", maxWidth: "36ch" }}>
+          Но это не так. И вот с этим предлагаю разобраться.
+        </p>
 
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 600,
-              letterSpacing: "0.12em", textTransform: "uppercase",
-              color: "var(--stone-500)", margin: "0 0 16px" }}>Чтобы:</p>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0,
-              display: "flex", flexDirection: "column", gap: 10 }}>
-              {GOALS.map((g) => (
-                <li key={g} style={{ display: "flex", alignItems: "baseline", gap: 12,
-                  fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.5, color: "var(--ink-900)" }}>
-                  <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>—</span>
-                  {g}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0,
+          display: "flex", flexDirection: "column", gap: 8 }}>
+          {GOALS.map((g) => (
+            <li key={g} style={{ display: "flex", alignItems: "baseline", gap: 12,
+              fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.5, color: "var(--ink-800)" }}>
+              <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>—</span>
+              {g}
+            </li>
+          ))}
+        </ul>
+
       </div>
     </section>
   );
