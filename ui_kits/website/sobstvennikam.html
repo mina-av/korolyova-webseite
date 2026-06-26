@@ -16,6 +16,7 @@
   @media (max-width: 980px) {
     .kit-desktop-nav { display: none !important; }
     .kit-mobile-toggle { display: block !important; }
+    .kit-problem-grid { grid-template-columns: 1fr !important; }
     .kit-owners-grid { grid-template-columns: 1fr !important; }
     .kit-process-grid { grid-template-columns: 1fr 1fr !important; }
     .kit-about-grid, .kit-footer-grid, .kit-form-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
@@ -38,6 +39,7 @@
 <script type="text/babel" src="Parts.jsx"></script>
 <script type="text/babel" src="Header.jsx"></script>
 <script type="text/babel" src="SubHero.jsx"></script>
+<script type="text/babel" src="OwnersProblem.jsx"></script>
 <script type="text/babel" src="Owners.jsx"></script>
 <script type="text/babel" src="Process.jsx"></script>
 <script type="text/babel" src="Contact.jsx"></script>
@@ -61,6 +63,7 @@
       <React.Fragment>
         <window.Header onNav={onNav} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         <window.SubHero page="owners" />
+        <window.OwnersProblem />
         <window.Owners onNav={onNav} n="01" />
         <window.Process n="02" />
         <window.Contact />
