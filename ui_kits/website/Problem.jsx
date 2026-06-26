@@ -18,7 +18,7 @@ function Problem() {
             <Eyebrow>С чего всё начинается</Eyebrow>
           </div>
           <div>
-            <p style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(1.7rem, 2.8vw, 2.5rem)",
+            <p style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(1.25rem, 1.8vw, 1.65rem)",
               lineHeight: 1.22, letterSpacing: "-0.01em", color: "var(--ink-900)", margin: 0, maxWidth: "26ch" }}>
               Вы не обязаны знать всё о строительстве. Но, когда речь о вашем объекте, все ошибки и дополнительные расходы оплачиваете именно вы.
             </p>
