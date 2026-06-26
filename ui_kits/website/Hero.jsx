@@ -85,17 +85,35 @@ function Hero({ onNav }) {
             </div>
           </div>
 
-          <div style={{ paddingTop: 28, borderTop: "1px solid var(--border-on-ink)", marginTop: 32 }}>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: 48,
-              color: "var(--brass-400)", lineHeight: 1 }}>20+</div>
-            <div style={{ fontFamily: "var(--font-sans)", fontSize: 11, letterSpacing: "0.18em",
-              textTransform: "uppercase", color: "rgba(247,242,233,0.48)", marginTop: 8 }}>
-              лет практики
-            </div>
-          </div>
         </div>
 
       </div>
+
+      {/* Kennzahlen-Streifen */}
+      <div style={{ background: "var(--paper)", borderBottom: "1px solid var(--sand-300)",
+        display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}
+        className="kit-stats-grid">
+        {[
+          { value: "20+", label: "лет практики", placeholder: false },
+          { value: "—",   label: "[Показатель]", placeholder: true },
+          { value: "—",   label: "[Показатель]", placeholder: true },
+        ].map((s, i) => (
+          <div key={i} style={{ padding: "clamp(28px,4vh,44px) clamp(24px,4vw,56px)",
+            borderLeft: i > 0 ? "1px solid var(--sand-300)" : "none" }}>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 400,
+              fontSize: "clamp(2.4rem, 3.8vw, 3.6rem)", lineHeight: 1,
+              color: s.placeholder ? "var(--sand-300)" : "var(--brass-600)" }}>
+              {s.value}
+            </div>
+            <div style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
+              letterSpacing: "0.18em", textTransform: "uppercase", marginTop: 10,
+              color: s.placeholder ? "var(--sand-300)" : "var(--stone-500)" }}>
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
     </section>
   );
 }
