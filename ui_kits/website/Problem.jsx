@@ -22,7 +22,7 @@ function Problem() {
               lineHeight: 1.22, letterSpacing: "-0.01em", color: "var(--ink-900)", margin: 0, maxWidth: "26ch" }}>
               Вы не обязаны знать всё о строительстве. Но, когда речь о вашем объекте, все ошибки и дополнительные расходы оплачиваете именно вы.
             </p>
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65, color: "var(--stone-500)", margin: "32px 0 0" }}>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65, color: "var(--ink-800)", margin: "32px 0 0" }}>
               Большинство собственников сталкиваются с одинаковыми вопросами:
             </p>
 
