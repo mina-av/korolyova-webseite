@@ -21,6 +21,12 @@ const CONTENT = {
     img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=80",
     back: "sobstvennikam.html",
   },
+  vedenie: {
+    label: "Представление интересов собственника",
+    heading: "Ваши интересы под профессиональной защитой",
+    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2000&q=80",
+    back: "sobstvennikam.html",
+  },
   business: {
     label: "Строительный бизнес",
     heading: "Вы создаёте строительный бизнес",

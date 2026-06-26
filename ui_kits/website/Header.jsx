@@ -6,6 +6,7 @@ const LINKS = [
   ["Собственникам", "sobstvennikam.html", [
     ["Консультация", "konsultaciya.html"],
     ["Курс для собственников", "kurs.html"],
+    ["Представление интересов", "vvedenie.html"],
   ]],
   ["Строительный бизнес", "biznes.html"],
   ["Партнёрская сеть", "set.html"],
