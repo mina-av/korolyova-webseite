@@ -6,14 +6,10 @@ function More({ children, previewLines = 5 }) {
   const [open, setOpen] = React.useState(false);
   return (
     <div>
-      <div style={{ position: "relative", overflow: "hidden",
+      <div style={{ overflow: "hidden",
         maxHeight: open ? "none" : `${previewLines * 1.6}em`,
         transition: "max-height 0.35s ease" }}>
         {children}
-        {!open && (
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 48,
-            background: "linear-gradient(to bottom, transparent, var(--paper))" }} />
-        )}
       </div>
       <button onClick={() => setOpen(!open)}
         style={{ background: "none", border: "none", padding: "8px 0 0", cursor: "pointer",
