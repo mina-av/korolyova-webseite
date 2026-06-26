@@ -14,6 +14,7 @@ const LIST_ITEMS = [
 ];
 
 function Hero({ onNav }) {
+  const [open, setOpen] = React.useState(false);
   return (
     <section>
       <div style={{ position: "relative", overflow: "hidden", minHeight: "82vh" }}>
@@ -38,9 +39,16 @@ function Hero({ onNav }) {
             lineHeight: 1.65, color: "rgba(247,242,233,0.78)", maxWidth: "52ch", margin: "0 0 12px" }}>
             Разница редко заключается в размере бюджета. Чаще всего она заключается в качестве решений, которые принимаются на каждом этапе проекта:
           </p>
-          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px",
+          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 4px",
             display: "flex", flexDirection: "column", gap: 4 }}>
-            {LIST_ITEMS.map((item) => (
+            {LIST_ITEMS.slice(0, 3).map((item) => (
+              <li key={item} style={{ fontFamily: "var(--font-sans)",
+                fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.5,
+                color: "rgba(247,242,233,0.78)" }}>
+                — {item}
+              </li>
+            ))}
+            {open && LIST_ITEMS.slice(3).map((item) => (
               <li key={item} style={{ fontFamily: "var(--font-sans)",
                 fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.5,
                 color: "rgba(247,242,233,0.78)" }}>
@@ -48,6 +56,16 @@ function Hero({ onNav }) {
               </li>
             ))}
           </ul>
+          <button onClick={() => setOpen(!open)}
+            style={{ background: "none", border: "none", padding: "6px 0 14px",
+              cursor: "pointer", fontFamily: "var(--font-sans)",
+              fontSize: "clamp(0.8rem, 1vw, 0.9rem)", fontWeight: 500,
+              color: "rgba(247,242,233,0.5)", display: "inline-flex",
+              alignItems: "center", gap: 5, transition: "color var(--dur-fast) var(--ease-out)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.85)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.5)")}>
+            {open ? "Скрыть ↑" : "Показать ещё ↓"}
+          </button>
           <p style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)",
             lineHeight: 1.65, color: "rgba(247,242,233,0.78)", maxWidth: "52ch", margin: "0 0 32px" }}>
             Именно решения определяют, получите вы ожидаемый результат или столкнётесь с лишними расходами, потерей времени и разочарованием.
