@@ -51,11 +51,13 @@ function OwnersProblem() {
         </p>
 
         <ul style={{ listStyle: "none", padding: 0, margin: 0,
-          display: "flex", flexDirection: "column", gap: 8 }}>
+          display: "flex", flexWrap: "wrap", gap: 10 }}>
           {GOALS.map((g) => (
-            <li key={g} style={{ display: "flex", alignItems: "baseline", gap: 12,
-              fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.5, color: "var(--ink-800)" }}>
-              <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>—</span>
+            <li key={g} style={{
+              fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.4,
+              color: "var(--ink-900)", background: "var(--cream-50)",
+              border: "1px solid var(--sand-300)",
+              padding: "12px 20px", borderRadius: 2 }}>
               {g}
             </li>
           ))}
