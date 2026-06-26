@@ -9,6 +9,12 @@ const CONTENT = {
     sub: "Вы не обязаны знать всё о строительстве и ремонте. Это нормально. Но, когда речь идёт о вашем объекте, все ошибки, их исправление и дополнительные расходы оплачиваете именно вы.",
     img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
   },
+  consultation: {
+    label: "Консультация",
+    heading: "Разбор вашей ситуации",
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
+    back: "sobstvennikam.html",
+  },
   business: {
     label: "Строительный бизнес",
     heading: "Вы создаёте строительный бизнес",
@@ -36,14 +42,14 @@ function SubHero({ page }) {
         background: "linear-gradient(to top, rgba(22,19,15,0.72) 0%, rgba(22,19,15,0.18) 100%)" }} />
       <div style={{ position: "relative", maxWidth: "var(--container-wide)", margin: "0 auto",
         padding: "0 var(--gutter)", paddingBottom: 48, width: "100%", boxSizing: "border-box" }}>
-        <a href="index.html"
+        <a href={c.back || "index.html"}
           style={{ display: "inline-flex", alignItems: "center", gap: 8,
             fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 500,
             color: "rgba(247,242,233,0.55)", textDecoration: "none", marginBottom: 28,
             transition: "color var(--dur-fast) var(--ease-out)" }}
           onMouseEnter={(e) => (e.currentTarget.style.color = "var(--cream-50)")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.55)")}>
-          ← На главную
+          ← {c.back ? "К услугам" : "На главную"}
         </a>
         <Eyebrow onDark>{c.label}</Eyebrow>
         <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 400,

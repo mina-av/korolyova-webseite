@@ -28,10 +28,11 @@ function Owners({ onNav, n = "02" }) {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28, alignItems: "stretch" }} className="kit-owners-grid">
+          <div onClick={(e) => { if (e.target.closest("a")) { e.preventDefault(); window.location.href = "konsultaciya.html"; } }}>
           <KFOfferCard
             title="Процесс ремонта уже идёт"
             subtitle="Консультация"
-            price="от 97 $" ctaLabel="Получить консультацию" onNav={onNav}>
+            price="от 97 $" ctaLabel="Получить консультацию">
             <More
               preview={<p>Вроде всё понятно, но есть вопросы — рекомендую консультацию.</p>}>
               <ul style={{ margin: "0 0 8px", paddingLeft: 18, display: "flex", flexDirection: "column", gap: 6 }}>
@@ -41,6 +42,7 @@ function Owners({ onNav, n = "02" }) {
               </ul>
             </More>
           </KFOfferCard>
+          </div>
 
           <KFOfferCard
             title="Планируете или уже делаете ремонт"

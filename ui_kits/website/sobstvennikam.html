@@ -37,16 +37,137 @@
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 <script src="../../_ds_bundle.js"></script>
 
+<script>
+  window.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var article = a.closest('article');
+    if (!article) return;
+    var grid = article.closest('.kit-owners-grid');
+    if (!grid) return;
+    var articles = grid.querySelectorAll('article');
+    if (articles[0] === article) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.href = 'konsultaciya.html';
+    }
+  }, true);
+</script>
+
 <script type="text/babel" src="Parts.jsx"></script>
 <script type="text/babel" src="Header.jsx"></script>
 <script type="text/babel" src="SubHero.jsx"></script>
 <script type="text/babel" src="OwnersProblem.jsx"></script>
-<script type="text/babel" src="Owners.jsx"></script>
 <script type="text/babel" src="Process.jsx"></script>
 <script type="text/babel" src="Contact.jsx"></script>
 <script type="text/babel" src="Footer.jsx"></script>
 
 <script type="text/babel" data-presets="react">
+  function More({ preview, children }) {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <div>
+        {preview}
+        {open && children}
+        <button onClick={() => setOpen(!open)}
+          style={{ background: "none", border: "none", padding: "10px 0 0", cursor: "pointer",
+            fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 500,
+            color: "var(--brass-600)", display: "inline-flex", alignItems: "center", gap: 5 }}>
+          {open ? "Скрыть ↑" : "Читать далее ↓"}
+        </button>
+      </div>
+    );
+  }
+
+  function ConsultCard() {
+    const [h, setH] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+    return (
+      <article onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+        style={{ position: "relative", display: "flex", flexDirection: "column",
+          background: "var(--surface-paper)", border: "1px solid var(--sand-300)",
+          padding: "36px 32px 30px", height: "100%",
+          boxShadow: h ? "var(--shadow-md)" : "none",
+          transition: "box-shadow var(--dur-base) var(--ease-out)" }}>
+        <span aria-hidden="true" style={{ position: "absolute", top: 0, left: 0,
+          height: 2, width: h ? "100%" : "0%", background: "var(--brass-500)",
+          transition: "width var(--dur-slow) var(--ease-out)" }} />
+        <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 29,
+          lineHeight: 1.08, letterSpacing: "-0.01em", color: "var(--ink-900)", margin: 0 }}>
+          Процесс ремонта уже идёт
+        </h3>
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.5,
+          fontWeight: 500, color: "var(--brass-700)", margin: "12px 0 0" }}>Консультация</p>
+        <div style={{ margin: "20px 0 0", display: "flex", flexDirection: "column", gap: 14,
+          flex: 1, fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.6,
+          color: "var(--stone-500)" }}>
+          <p style={{ margin: 0 }}>Вроде всё понятно, но есть вопросы — рекомендую консультацию.</p>
+          {open && <ul style={{ margin: "0 0 8px", paddingLeft: 18, display: "flex", flexDirection: "column", gap: 6 }}>
+            <li>разбор вашей ситуации</li>
+            <li>рекомендации по дальнейшим действиям</li>
+            <li>помощь в принятии важных решений</li>
+          </ul>}
+          <button onClick={() => setOpen(!open)}
+            style={{ background: "none", border: "none", padding: "0", cursor: "pointer",
+              fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 500,
+              color: "var(--brass-600)", display: "inline-flex", alignItems: "center",
+              gap: 5, textAlign: "left" }}>
+            {open ? "Скрыть ↑" : "Читать далее ↓"}
+          </button>
+        </div>
+        <div style={{ marginTop: 26, display: "flex", flexDirection: "column", gap: 14 }}>
+          <div style={{ height: 1, background: "var(--sand-300)" }} />
+          <span style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 28,
+            color: "var(--ink-900)" }}>от 97 $</span>
+          <a href="konsultaciya.html"
+            style={{ display: "inline-flex", alignItems: "center", gap: 9,
+              fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600,
+              letterSpacing: "0.04em", color: h ? "var(--brass-600)" : "var(--ink-900)",
+              textDecoration: "none", transition: "color var(--dur-fast) var(--ease-out)" }}>
+            Получить консультацию →
+          </a>
+        </div>
+      </article>
+    );
+  }
+
+  function OwnersSection({ onNav, n }) {
+    const KFSectionHead = window.KFSectionHead;
+    const KFOfferCard = window.KFOfferCard;
+    return (
+      <section id="owners" style={{ background: "var(--paper)", padding: "var(--section-y) 0" }}>
+        <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
+          <div style={{ marginBottom: 60 }}>
+            <KFSectionHead n={n} label="Для собственников недвижимости"
+              heading="На каком этапе вы сейчас?" max="22ch" />
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28, alignItems: "stretch" }} className="kit-owners-grid">
+            <ConsultCard />
+
+            <KFOfferCard
+              title="Планируете или уже делаете ремонт"
+              subtitle="Курс для собственников"
+              price="от 237 $" ctaLabel="Подробнее о курсе" onNav={onNav}>
+              <More preview={<p>Хотите понимать, что происходит на вашем объекте в любой момент времени — рекомендую курс.</p>}>
+                <p>Для тех, кто хочет понимать все процессы на своём объекте и уверенно контролировать строительство или ремонт. Вы получите систему знаний, которая поможет принимать решения осознанно и не зависеть от чужого мнения.</p>
+              </More>
+            </KFOfferCard>
+
+            <KFOfferCard
+              title="Хотите не беспокоиться и быть уверены в результате"
+              subtitle="Представление интересов собственника"
+              price="от 2 570 $" ctaLabel="Подробнее" onNav={onNav}>
+              <More preview={<p>Тогда для вас уместно стратегическое ведение объекта.</p>}>
+                <p>Для тех, кто хочет делегировать контроль проекта и быть уверенным, что его интересы защищены на каждом этапе.</p>
+                <p>Я представляю интересы собственника, контролирую процессы, участвую в принятии ключевых решений и помогаю довести проект до результата.</p>
+              </More>
+            </KFOfferCard>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   function App() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
@@ -65,7 +186,7 @@
         <window.Header onNav={onNav} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         <window.SubHero page="owners" />
         <window.OwnersProblem />
-        <window.Owners onNav={onNav} n="01" />
+        <OwnersSection onNav={onNav} n="01" />
         <window.Process n="02" />
         <window.Contact />
         <window.Footer onNav={onNav} />
