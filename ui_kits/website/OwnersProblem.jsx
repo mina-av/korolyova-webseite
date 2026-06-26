@@ -51,16 +51,19 @@ function OwnersProblem() {
         </p>
 
         <ul style={{ listStyle: "none", padding: 0, margin: 0,
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
-          borderTop: "1px solid var(--sand-300)", borderBottom: "1px solid var(--sand-300)" }}
+          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}
           className="kit-goals-grid">
           {GOALS.map((g, i) => (
             <li key={g} style={{
-              fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.5,
-              color: "var(--ink-900)",
-              padding: "20px 24px",
-              borderLeft: i > 0 ? "1px solid var(--sand-300)" : "none" }}>
-              {g}
+              background: "var(--cream-50)", padding: "24px 24px 28px",
+              display: "flex", flexDirection: "column", gap: 14 }}>
+              <span style={{ fontFamily: "var(--font-display)", fontWeight: 400,
+                fontSize: "clamp(2rem, 3vw, 2.8rem)", lineHeight: 1,
+                color: "var(--brass-600)" }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 15,
+                lineHeight: 1.5, color: "var(--ink-900)" }}>{g}</span>
             </li>
           ))}
         </ul>
