@@ -1,6 +1,5 @@
 /* global React */
 (function () {
-const { KFSectionHead } = window;
 const { Eyebrow } = window.KorolyovaDesignSystem_d31d2b;
 
 const PATHS = [
@@ -96,11 +95,7 @@ function PathRow({ p }) {
 
 function Paths() {
   return (
-    <section id="puti" style={{ background: "var(--paper)", padding: "var(--section-y) 0 0" }}>
-      <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto",
-        padding: "0 var(--gutter)", marginBottom: 56 }}>
-        <KFSectionHead n="01" heading="Выберите путь, который актуален для вас сегодня" max="20ch" />
-      </div>
+    <section id="puti" style={{ background: "var(--paper)", padding: "0" }}>
       <div style={{ borderBottom: "1px solid var(--sand-300)" }}>
         {PATHS.map((p) => <PathRow key={p.href} p={p} />)}
       </div>
