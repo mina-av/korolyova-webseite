@@ -51,14 +51,15 @@ function OwnersProblem() {
         </p>
 
         <ul style={{ listStyle: "none", padding: 0, margin: 0,
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}
+          display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+          borderTop: "1px solid var(--sand-300)", borderBottom: "1px solid var(--sand-300)" }}
           className="kit-goals-grid">
-          {GOALS.map((g) => (
+          {GOALS.map((g, i) => (
             <li key={g} style={{
-              fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.4,
-              color: "var(--ink-900)", background: "var(--cream-50)",
-              border: "1px solid var(--sand-300)",
-              padding: "14px 20px", borderRadius: 2 }}>
+              fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.5,
+              color: "var(--ink-900)",
+              padding: "20px 24px",
+              borderLeft: i > 0 ? "1px solid var(--sand-300)" : "none" }}>
               {g}
             </li>
           ))}
