@@ -20,6 +20,8 @@
     .kit-hero-grid > *:first-child { min-height: 60vw; }
     .kit-stats-grid { grid-template-columns: 1fr !important; }
     .kit-stats-grid > * { border-left: none !important; border-top: 1px solid var(--sand-300); }
+    .kit-pq-grid { grid-template-columns: 1fr !important; }
+    .kit-pq-grid > * { border-left: none !important; border-top: 1px solid var(--sand-300); }
     .kit-path-row { grid-template-columns: 1fr !important; }
     .kit-problem-grid, .kit-about-grid, .kit-footer-grid, .kit-form-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   }
@@ -39,6 +41,7 @@
 <script type="text/babel" src="Header.jsx"></script>
 <script type="text/babel" src="Hero.jsx"></script>
 <script type="text/babel" src="Problem.jsx"></script>
+<script type="text/babel" src="PathsQuick.jsx"></script>
 <script type="text/babel" src="Paths.jsx"></script>
 <script type="text/babel" src="About.jsx"></script>
 <script type="text/babel" src="Contact.jsx"></script>
@@ -62,6 +65,7 @@
       <React.Fragment>
         <window.Header onNav={onNav} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         <window.Hero onNav={onNav} />
+        <window.PathsQuick />
         <window.Problem />
         <window.Paths />
         <window.About n="02" />
