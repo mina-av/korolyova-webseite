@@ -12,6 +12,48 @@ const LINKS = [
   ["Об авторе", "index.html#about"],
 ];
 
+function NavDropdown({ label, href, sub, active, isActive }) {
+  const [open, setOpen] = React.useState(false);
+  const timer = React.useRef(null);
+
+  const show = () => { clearTimeout(timer.current); setOpen(true); };
+  const hide = () => { timer.current = setTimeout(() => setOpen(false), 120); };
+
+  return (
+    <div style={{ position: "relative" }} onMouseEnter={show} onMouseLeave={hide}>
+      <a href={href}
+        style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500,
+          letterSpacing: "0.01em", whiteSpace: "nowrap", textDecoration: "none",
+          color: active ? "var(--brass-600)" : "var(--ink-700)",
+          borderBottom: active ? "1px solid var(--brass-600)" : "1px solid transparent",
+          paddingBottom: 2, transition: "color var(--dur-fast) var(--ease-out)",
+          display: "inline-flex", alignItems: "center", gap: 4 }}>
+        {label} <span style={{ fontSize: 10, opacity: 0.55 }}>▾</span>
+      </a>
+      {open && (
+        <div onMouseEnter={show} onMouseLeave={hide}
+          style={{ position: "absolute", top: "100%", left: 0, paddingTop: 8, zIndex: 50, minWidth: 220 }}>
+          <div style={{ background: "var(--cream-50)", border: "1px solid var(--sand-300)",
+            boxShadow: "var(--shadow-md)" }}>
+            {sub.map(([sl, sh]) => (
+              <a key={sh} href={sh}
+                style={{ display: "block", padding: "11px 18px",
+                  fontFamily: "var(--font-sans)", fontSize: 13.5, fontWeight: 500,
+                  color: isActive(sh) ? "var(--brass-600)" : "var(--ink-700)",
+                  textDecoration: "none", borderBottom: "1px solid var(--sand-200)",
+                  transition: "background var(--dur-fast) var(--ease-out)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--sand-100)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "")}>
+                {sl}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Header({ onNav, mobileOpen, setMobileOpen }) {
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
@@ -40,38 +82,7 @@ function Header({ onNav, mobileOpen, setMobileOpen }) {
         <nav style={{ display: "flex", gap: 34, alignItems: "center" }} className="kit-desktop-nav">
           {LINKS.map(([l, href, sub]) => {
             const active = isActive(href) || (sub && sub.some(([, sh]) => isActive(sh)));
-            return sub ? (
-              <div key={href} style={{ position: "relative" }}
-                onMouseEnter={(e) => { e.currentTarget.querySelector('.kit-dropdown').style.display = 'block'; }}
-                onMouseLeave={(e) => { e.currentTarget.querySelector('.kit-dropdown').style.display = 'none'; }}>
-                <a href={href}
-                  style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500,
-                    letterSpacing: "0.01em", whiteSpace: "nowrap", textDecoration: "none",
-                    color: active ? "var(--brass-600)" : "var(--ink-700)",
-                    borderBottom: active ? "1px solid var(--brass-600)" : "1px solid transparent",
-                    paddingBottom: 2, transition: "color var(--dur-fast) var(--ease-out)",
-                    display: "inline-flex", alignItems: "center", gap: 4 }}>
-                  {l} <span style={{ fontSize: 10, opacity: 0.6 }}>▾</span>
-                </a>
-                <div className="kit-dropdown" style={{ display: "none", position: "absolute",
-                  top: "100%", left: 0, marginTop: 8, background: "var(--cream-50)",
-                  border: "1px solid var(--sand-300)", minWidth: 220, zIndex: 50,
-                  boxShadow: "var(--shadow-md)" }}>
-                  {sub.map(([sl, sh]) => (
-                    <a key={sh} href={sh}
-                      style={{ display: "block", padding: "11px 18px",
-                        fontFamily: "var(--font-sans)", fontSize: 13.5, fontWeight: 500,
-                        color: isActive(sh) ? "var(--brass-600)" : "var(--ink-700)",
-                        textDecoration: "none", borderBottom: "1px solid var(--sand-200)",
-                        transition: "background var(--dur-fast) var(--ease-out)" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = "var(--sand-100)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.background = "")}>
-                      {sl}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
+            if (!sub) return (
               <a key={href} href={href}
                 style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500,
                   letterSpacing: "0.01em", whiteSpace: "nowrap", textDecoration: "none",
@@ -83,6 +94,7 @@ function Header({ onNav, mobileOpen, setMobileOpen }) {
                 {l}
               </a>
             );
+            return <NavDropdown key={href} label={l} href={href} sub={sub} active={active} isActive={isActive} />;
           })}
           <Button size="sm" variant="primary" onClick={() => onNav("contact")}>Записаться на консультацию</Button>
         </nav>
