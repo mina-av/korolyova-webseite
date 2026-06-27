@@ -64,18 +64,17 @@ function Business({ n = "01" }) {
               color: "var(--stone-500)", margin: "0 0 20px" }}>
               Поэтому моё предложение заключается в том, чтобы:
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12,
-              margin: "0 0 48px" }} className="kit-offer-grid">
+            <div style={{ margin: "0 0 48px", borderTop: "1px solid var(--sand-300)" }}>
               {OFFER_ITEMS.map((item, i) => (
-                <div key={item} style={{ background: "var(--cream-50)",
-                  border: "1px solid var(--sand-300)", padding: "22px 22px 20px",
-                  display: "flex", flexDirection: "column", gap: 12 }}>
+                <div key={item} style={{ display: "grid", gridTemplateColumns: "52px 1fr",
+                  gap: "0 24px", padding: "20px 0", borderBottom: "1px solid var(--sand-300)",
+                  alignItems: "start" }}>
                   <span style={{ fontFamily: "var(--font-sans)", fontWeight: 700,
-                    fontSize: 22, color: "var(--brass-600)", lineHeight: 1 }}>
+                    fontSize: 26, color: "var(--brass-600)", lineHeight: 1.1 }}>
                     0{i + 1}
                   </span>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15, fontWeight: 500,
-                    lineHeight: 1.45, color: "var(--ink-900)", margin: 0 }}>{item}</p>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, fontWeight: 500,
+                    lineHeight: 1.4, color: "var(--ink-900)", margin: 0 }}>{item}</p>
                 </div>
               ))}
             </div>
