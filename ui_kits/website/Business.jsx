@@ -3,11 +3,11 @@
 const { Button } = window.KorolyovaDesignSystem_d31d2b;
 
 const WHY_ITEMS = [
-  "Люди покупают квартиры",
-  "Инвесторы приобретают объекты",
-  "Компании открывают офисы",
-  "Семьи строят дома",
-  "Собственники делают ремонты",
+  { text: "Люди покупают квартиры",       img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" },
+  { text: "Инвесторы приобретают объекты", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" },
+  { text: "Компании открывают офисы",      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" },
+  { text: "Семьи строят дома",             img: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80" },
+  { text: "Собственники делают ремонты",   img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" },
 ];
 
 const OFFER_ITEMS = [
@@ -39,18 +39,26 @@ function Business({ n = "01" }) {
               color: "var(--ink-800)", margin: "0 0 20px" }}>
               Строительство остаётся одной из самых востребованных и устойчивых сфер бизнеса. Именно поэтому грамотный строительный бизнес остаётся востребованным независимо от изменений рынка:
             </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px",
-              borderTop: "1px solid var(--sand-300)" }}>
-              {WHY_ITEMS.map((item) => (
-                <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 14,
-                  padding: "11px 0", borderBottom: "1px solid var(--sand-300)",
-                  fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.5,
-                  color: "var(--ink-800)" }}>
-                  <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>—</span>
-                  {item}
-                </li>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)",
+              gap: 6, margin: "0 0 28px" }} className="kit-why-grid">
+              {WHY_ITEMS.map(({ text, img }) => (
+                <div key={text} style={{ position: "relative", overflow: "hidden",
+                  aspectRatio: "3/4", minHeight: 160 }}>
+                  <img src={img} alt="" loading="lazy"
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%",
+                      objectFit: "cover", filter: "saturate(0.7) brightness(0.55)",
+                      transition: "transform 0.4s ease" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.04)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
+                  <div style={{ position: "absolute", inset: 0,
+                    background: "linear-gradient(to top, rgba(22,19,15,0.72) 0%, rgba(22,19,15,0.1) 55%)" }} />
+                  <p style={{ position: "absolute", bottom: 0, left: 0, right: 0,
+                    padding: "16px 14px", margin: 0,
+                    fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 500,
+                    lineHeight: 1.35, color: "var(--cream-50)" }}>{text}</p>
+                </div>
               ))}
-            </ul>
+            </div>
 
             <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.7,
               color: "var(--ink-800)", margin: "0 0 20px" }}>
