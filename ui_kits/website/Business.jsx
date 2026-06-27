@@ -61,21 +61,24 @@ function Business({ n = "01" }) {
               Но опыт не появляется после просмотра уроков и прочтения книг. Он появляется тогда, когда вы начинаете работать с клиентами, подрядчиками, бюджетами, сроками и реальными объектами.
             </p>
             <p style={{ fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.65,
-              color: "var(--stone-500)", margin: "0 0 12px" }}>
+              color: "var(--stone-500)", margin: "0 0 20px" }}>
               Поэтому моё предложение заключается в том, чтобы:
             </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 48px",
-              borderTop: "1px solid var(--sand-300)" }}>
-              {OFFER_ITEMS.map((item) => (
-                <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 14,
-                  padding: "11px 0", borderBottom: "1px solid var(--sand-300)",
-                  fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.5,
-                  color: "var(--ink-800)" }}>
-                  <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>→</span>
-                  {item}
-                </li>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12,
+              margin: "0 0 48px" }} className="kit-offer-grid">
+              {OFFER_ITEMS.map((item, i) => (
+                <div key={item} style={{ background: "var(--cream-50)",
+                  border: "1px solid var(--sand-300)", padding: "22px 22px 20px",
+                  display: "flex", flexDirection: "column", gap: 12 }}>
+                  <span style={{ fontFamily: "var(--font-sans)", fontWeight: 700,
+                    fontSize: 22, color: "var(--brass-600)", lineHeight: 1 }}>
+                    0{i + 1}
+                  </span>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15, fontWeight: 500,
+                    lineHeight: 1.45, color: "var(--ink-900)", margin: 0 }}>{item}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>
