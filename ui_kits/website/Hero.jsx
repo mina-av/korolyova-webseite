@@ -14,6 +14,7 @@ const LIST_ITEMS = [
 ];
 
 function Hero({ onNav }) {
+  const [open, setOpen] = React.useState(false);
   return (
     <section>
       <div style={{ position: "relative", overflow: "hidden", minHeight: "82vh" }}>
@@ -35,24 +36,37 @@ function Hero({ onNav }) {
             <span style={{ fontStyle: "italic" }}>уничтожать</span> его
           </h1>
           <p style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)",
-            lineHeight: 1.65, color: "rgba(247,242,233,0.78)", maxWidth: "52ch", margin: "0 0 12px" }}>
+            lineHeight: 1.65, color: "rgba(247,242,233,0.78)", maxWidth: "52ch", margin: "0 0 8px" }}>
             Разница редко заключается в размере бюджета. Чаще всего она заключается в качестве решений, которые принимаются на каждом этапе проекта:
           </p>
-          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px",
-            display: "flex", flexDirection: "column", gap: 4 }}>
-            {LIST_ITEMS.map((item) => (
-              <li key={item} style={{ fontFamily: "var(--font-sans)",
-                fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.5,
-                color: "rgba(247,242,233,0.78)" }}>
-                — {item}
-              </li>
-            ))}
-          </ul>
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)",
-            lineHeight: 1.65, color: "rgba(247,242,233,0.78)", maxWidth: "52ch", margin: "0 0 32px" }}>
-            Именно решения определяют, получите вы ожидаемый результат или столкнётесь с лишними расходами, потерей времени и разочарованием.
-          </p>
-          <div>
+          <button onClick={() => setOpen(!open)}
+            style={{ background: "none", border: "none", padding: "0 0 20px", cursor: "pointer",
+              fontFamily: "var(--font-sans)", fontSize: "clamp(0.8rem, 1vw, 0.875rem)", fontWeight: 500,
+              color: "rgba(247,242,233,0.45)", display: "inline-flex", alignItems: "center", gap: 5,
+              transition: "color 0.2s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.85)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(247,242,233,0.45)")}>
+            {open ? "Скрыть ↑" : "Показать ↓"}
+          </button>
+          {open && (
+            <React.Fragment>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px",
+                display: "flex", flexDirection: "column", gap: 4 }}>
+                {LIST_ITEMS.map((item) => (
+                  <li key={item} style={{ fontFamily: "var(--font-sans)",
+                    fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.5,
+                    color: "rgba(247,242,233,0.78)" }}>
+                    — {item}
+                  </li>
+                ))}
+              </ul>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)",
+                lineHeight: 1.65, color: "rgba(247,242,233,0.78)", maxWidth: "52ch", margin: "0 0 24px" }}>
+                Именно решения определяют, получите вы ожидаемый результат или столкнётесь с лишними расходами, потерей времени и разочарованием.
+              </p>
+            </React.Fragment>
+          )}
+          <div style={{ marginTop: open ? 8 : 0 }}>
             <Button variant="accent" size="lg" onClick={() => onNav("puti")}>
               Выбрать свой путь
             </Button>
