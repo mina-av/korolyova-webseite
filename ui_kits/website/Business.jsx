@@ -17,17 +17,71 @@ const OFFER_ITEMS = [
   "создать прочную основу для собственного бизнеса",
 ];
 
-const PROGRAM_ITEMS = [
-  "поиск и привлечение клиентов",
-  "формирование коммерческих предложений",
-  "работа с бюджетами и финансовой моделью проекта",
-  "подбор подрядчиков и поставщиков",
-  "организация строительных процессов",
-  "управление качеством работ",
-  "работа с командой",
-  "кризис-менеджмент",
-  "развитие профессиональной сети контактов",
+const DIAGRAM_ITEMS = [
+  ["поиск и привлечение", "клиентов"],
+  ["формирование коммерческих", "предложений"],
+  ["работа с бюджетами", "и финансовой моделью"],
+  ["подбор подрядчиков", "и поставщиков"],
+  ["организация строительных", "процессов"],
+  ["управление", "качеством работ"],
+  ["работа с командой"],
+  ["кризис-менеджмент"],
+  ["развитие профессиональной", "сети контактов"],
 ];
+
+function ProgramDiagram() {
+  const cx = 480, cy = 315, r = 210;
+  const N = DIAGRAM_ITEMS.length;
+  const LH = 17;
+
+  return (
+    <svg viewBox="0 0 960 630" style={{ width: "100%", display: "block", overflow: "visible" }}
+      aria-label="Элементы программы" className="kit-prog-svg">
+      <circle cx={cx} cy={cy} r={r} fill="none"
+        stroke="var(--sand-300)" strokeWidth={1} strokeDasharray="3 7" />
+
+      {DIAGRAM_ITEMS.map((lines, i) => {
+        const angle = (i / N) * Math.PI * 2 - Math.PI / 2;
+        const dx = Math.cos(angle), dy = Math.sin(angle);
+        const dotX = cx + r * dx, dotY = cy + r * dy;
+        const isRight = dx > 0.15, isLeft = dx < -0.15;
+        const anchor = isRight ? "start" : isLeft ? "end" : "middle";
+        const tX = dotX + (isRight ? 14 : isLeft ? -14 : 0);
+        let tY0;
+        if (isRight || isLeft) {
+          tY0 = dotY - ((lines.length - 1) * LH) / 2 - 4;
+        } else if (dy < 0) {
+          tY0 = dotY - 18 - (lines.length - 1) * LH;
+        } else {
+          tY0 = dotY + 18;
+        }
+        return (
+          <g key={i}>
+            <line x1={cx} y1={cy} x2={dotX} y2={dotY}
+              stroke="var(--sand-300)" strokeWidth={1} />
+            <circle cx={dotX} cy={dotY} r={5} fill="var(--brass-600)" />
+            {lines.map((line, j) => (
+              <text key={j} x={tX} y={tY0 + j * LH}
+                textAnchor={anchor}
+                fill="var(--ink-800)" fontSize={12.5}
+                fontFamily="Onest, -apple-system, sans-serif">
+                {line}
+              </text>
+            ))}
+          </g>
+        );
+      })}
+
+      <circle cx={cx} cy={cy} r={72} fill="var(--ink-900)" />
+      <text x={cx} y={cy - 6} textAnchor="middle"
+        fill="var(--cream-50)" fontSize={13.5} fontWeight={600}
+        fontFamily="Onest, -apple-system, sans-serif">Программа</text>
+      <text x={cx} y={cy + 13} textAnchor="middle"
+        fill="rgba(247,242,233,0.45)" fontSize={11}
+        fontFamily="Onest, -apple-system, sans-serif">развития бизнеса</text>
+    </svg>
+  );
+}
 
 function Business({ n = "01" }) {
   return (
@@ -99,21 +153,25 @@ function Business({ n = "01" }) {
             </p>
             <p style={{ fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 600,
               letterSpacing: "0.14em", textTransform: "uppercase",
-              color: "var(--stone-500)", margin: "20px 0 14px" }}>
+              color: "var(--stone-500)", margin: "20px 0 24px" }}>
               Внутри программы мы разбираем:
             </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 56px",
-              borderTop: "1px solid var(--sand-300)" }}>
-              {PROGRAM_ITEMS.map((item) => (
-                <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 14,
-                  padding: "11px 0", borderBottom: "1px solid var(--sand-300)",
-                  fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.5,
-                  color: "var(--ink-800)" }}>
-                  <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>—</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div style={{ margin: "0 0 56px" }}>
+              <ProgramDiagram />
+              <ul style={{ listStyle: "none", padding: 0, margin: 0,
+                borderTop: "1px solid var(--sand-300)", display: "none" }}
+                className="kit-prog-list">
+                {DIAGRAM_ITEMS.map((lines) => (
+                  <li key={lines[0]} style={{ display: "flex", alignItems: "baseline", gap: 14,
+                    padding: "11px 0", borderBottom: "1px solid var(--sand-300)",
+                    fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.5,
+                    color: "var(--ink-800)" }}>
+                    <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>—</span>
+                    {lines.join(" ")}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <p style={{ fontFamily: "var(--font-sans)", fontStyle: "italic", fontSize: 17,
               lineHeight: 1.6, color: "var(--ink-700)", margin: "0 0 16px" }}>
