@@ -25,8 +25,7 @@ const TIER2_PATH = [
   "определение стратегии реализации проекта",
   "формирование коммерческого предложения",
   "переговоры и заключение договора",
-  "формирование бюджета проекта",
-  "подготовка сметной документации",
+  "формирование бюджета проекта и подготовка сметной документации",
   "подбор подрядчиков, поставщиков и профильных специалистов",
   "выстраивание взаимодействия с клиентом и командой проекта",
   "организация строительного процесса",
@@ -63,172 +62,181 @@ const TIER3_RESULTS = [
   "ускорение развития бизнеса и уверенность в каждом следующем шаге",
 ];
 
-function ItemList({ items, arrow = "—" }) {
+function ItemList({ items, dark, arrow = "—" }) {
+  const border = dark ? "1px solid rgba(247,242,233,0.12)" : "1px solid var(--sand-200)";
+  const color  = dark ? "rgba(247,242,233,0.72)" : "var(--ink-700)";
+  const marker = dark ? "var(--brass-400)" : "var(--brass-600)";
   return (
-    <ul style={{ listStyle: "none", padding: 0, margin: 0,
-      borderTop: "1px solid var(--sand-300)" }}>
+    <ul style={{ listStyle: "none", padding: 0, margin: 0, borderTop: border }}>
       {items.map((item) => (
-        <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 12,
-          padding: "9px 0", borderBottom: "1px solid var(--sand-300)",
-          fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.5,
-          color: "var(--ink-700)" }}>
-          <span style={{ color: "var(--brass-600)", flexShrink: 0 }}>{arrow}</span>
-          {item}
+        <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 10,
+          padding: "8px 0", borderBottom: border,
+          fontFamily: "var(--font-sans)", fontSize: 13.5, lineHeight: 1.5, color }}>
+          <span style={{ color: marker, flexShrink: 0 }}>{arrow}</span>{item}
         </li>
       ))}
     </ul>
   );
 }
 
-function TierCard({ dark, label, title, price, priceNote, ctaLabel, ctaHref, children }) {
-  const bg = dark ? "var(--ink-900)" : "var(--paper)";
-  const textPrimary = dark ? "var(--cream-50)" : "var(--ink-900)";
-  const textSecondary = dark ? "rgba(247,242,233,0.62)" : "var(--stone-500)";
-  const border = dark ? "1px solid rgba(247,242,233,0.12)" : "1px solid var(--sand-300)";
-
+function ToggleBtn({ open, setOpen, dark }) {
+  const color = dark ? "rgba(247,242,233,0.4)" : "var(--stone-400)";
+  const hover = dark ? "rgba(247,242,233,0.8)" : "var(--ink-900)";
   return (
-    <div style={{ background: bg, border, padding: "40px 36px",
-      display: "flex", flexDirection: "column", gap: 0 }}>
-      <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
-        letterSpacing: "0.16em", textTransform: "uppercase",
-        color: dark ? "rgba(247,242,233,0.45)" : "var(--stone-400)", margin: "0 0 14px" }}>
-        {label}
-      </p>
-      <h2 style={{ fontFamily: "var(--font-sans)", fontWeight: 600,
-        fontSize: "clamp(1.3rem, 2vw, 1.7rem)", lineHeight: 1.15,
-        color: textPrimary, margin: "0 0 28px" }}>
-        {title}
-      </h2>
-      {children({ textPrimary, textSecondary, border })}
-      <div style={{ borderTop: dark ? "1px solid rgba(247,242,233,0.15)" : "1px solid var(--sand-300)",
-        marginTop: 32, paddingTop: 24 }}>
-        <p style={{ fontFamily: "var(--font-sans)", fontWeight: 700,
-          fontSize: "clamp(1.5rem, 2.4vw, 2rem)", color: dark ? "var(--cream-50)" : "var(--ink-900)",
-          margin: "0 0 4px" }}>{price}</p>
-        {priceNote && <p style={{ fontFamily: "var(--font-sans)", fontSize: 13,
-          color: textSecondary, margin: "0 0 20px", lineHeight: 1.5 }}>{priceNote}</p>}
-        <a href={ctaHref}>
-          <Button variant={dark ? "outline-on-dark" : "accent"} size="md">{ctaLabel}</Button>
-        </a>
-      </div>
-    </div>
+    <button onClick={() => setOpen(!open)}
+      style={{ background: "none", border: "none", padding: "10px 0 0", cursor: "pointer",
+        fontFamily: "var(--font-sans)", fontSize: 12.5, fontWeight: 500,
+        color, display: "inline-flex", alignItems: "center", gap: 5,
+        transition: "color 0.15s" }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = hover)}
+      onMouseLeave={(e) => (e.currentTarget.style.color = color)}>
+      {open ? "Скрыть ↑" : "Подробнее ↓"}
+    </button>
+  );
+}
+
+function Label({ dark, children }) {
+  return (
+    <p style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 600,
+      letterSpacing: "0.14em", textTransform: "uppercase",
+      color: dark ? "rgba(247,242,233,0.35)" : "var(--stone-400)",
+      margin: "16px 0 10px" }}>{children}</p>
   );
 }
 
 function TarifyContent() {
+  const [open1, setOpen1] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+
   return (
-    <React.Fragment>
-      <section style={{ background: "var(--paper)", padding: "var(--section-y) 0" }}>
-        <div style={{ maxWidth: "var(--container)", margin: "0 auto", padding: "0 var(--gutter)" }}>
-          <div style={{ maxWidth: "60ch", marginBottom: 56 }}>
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.7,
-              color: "var(--ink-800)", margin: 0 }}>
-              У всех разные цели, опыт и уровень подготовки. Кому-то достаточно получить систему и внедрять её самостоятельно. Кто-то хочет пройти первый объект под руководством эксперта. А кто-то ищет стратегического партнёра для создания или масштабирования бизнеса.
-            </p>
-          </div>
+    <section style={{ background: "var(--paper)", padding: "var(--section-y) 0" }}>
+      <div style={{ maxWidth: "var(--container-wide)", margin: "0 auto", padding: "0 var(--gutter)" }}>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 2 }} className="kit-tarify-stack">
-
-            <TierCard label="Формат 01" title="Самостоятельное изучение"
-              price="587 $" ctaLabel="Получить доступ" ctaHref="#contact">
-              {({ textSecondary }) => (
-                <React.Fragment>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.65,
-                    color: textSecondary, margin: "0 0 20px" }}>
-                    Полная система создания и развития строительного бизнеса. Для тех, кто готов самостоятельно изучать материалы и внедрять их в свою работу. В программе собран практический опыт более 20 лет работы в сфере недвижимости, строительства и управления проектами.
-                  </p>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
-                    letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "var(--stone-400)", margin: "0 0 12px" }}>В программе:</p>
-                  <div style={{ marginBottom: 20 }}><ItemList items={TIER1_ITEMS} /></div>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 13,
-                    color: textSecondary, margin: "12px 0 0", lineHeight: 1.5 }}>
-                    95 модулей · 297 уроков · более 1 000 страниц · регламенты · договоры · шаблоны · чек-листы
-                  </p>
-                </React.Fragment>
-              )}
-            </TierCard>
-
-            <TierCard dark label="Формат 02 — Основной"
-              title="Первый объект под руководством эксперта"
-              price="от 3 870 $"
-              priceNote="Финальная стоимость определяется после предварительного интервью"
-              ctaLabel="Заполнить анкету" ctaHref="#contact">
-              {({ textSecondary, border }) => (
-                <React.Fragment>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.65,
-                    color: textSecondary, margin: "0 0 20px" }}>
-                    Для тех, кто хочет создать строительный бизнес на практике. Мы вместе проходим весь путь первого проекта — рядом с человеком, который уже более 20 лет работает в сфере недвижимости, строительства и управления проектами.
-                  </p>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
-                    letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "rgba(247,242,233,0.35)", margin: "0 0 12px" }}>Мы вместе проходим:</p>
-                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px",
-                    borderTop: "1px solid rgba(247,242,233,0.12)" }}>
-                    {TIER2_PATH.map((item) => (
-                      <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 12,
-                        padding: "9px 0", borderBottom: "1px solid rgba(247,242,233,0.12)",
-                        fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.5,
-                        color: "rgba(247,242,233,0.72)" }}>
-                        <span style={{ color: "var(--brass-400)", flexShrink: 0 }}>—</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
-                    letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "rgba(247,242,233,0.35)", margin: "0 0 12px" }}>Ваш результат:</p>
-                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px",
-                    borderTop: "1px solid rgba(247,242,233,0.12)" }}>
-                    {TIER2_RESULTS.map((item) => (
-                      <li key={item} style={{ display: "flex", alignItems: "baseline", gap: 12,
-                        padding: "9px 0", borderBottom: "1px solid rgba(247,242,233,0.12)",
-                        fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.5,
-                        color: "rgba(247,242,233,0.72)" }}>
-                        <span style={{ color: "var(--brass-400)", flexShrink: 0 }}>→</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 13,
-                    color: "rgba(247,242,233,0.45)", margin: 0, lineHeight: 1.5 }}>
-                    5 месяцев сопровождения · закрытый чат · Zoom-встречи · доступ к партнёрской сети · участие после предварительного интервью
-                  </p>
-                </React.Fragment>
-              )}
-            </TierCard>
-
-            <TierCard label="Формат 03"
-              title="Стратегическое партнёрство"
-              price="от 15 000 $"
-              priceNote="Финальные условия определяются после личной стратегической встречи"
-              ctaLabel="Заполнить анкету" ctaHref="#contact">
-              {({ textSecondary }) => (
-                <React.Fragment>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.65,
-                    color: textSecondary, margin: "0 0 20px" }}>
-                    Самый высокий уровень взаимодействия. Для предпринимателей и инвесторов, которым необходим стратегический партнёр, способный видеть ситуацию шире, своевременно выявлять риски и помогать принимать решения в ключевые моменты развития бизнеса.
-                  </p>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
-                    letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "var(--stone-400)", margin: "0 0 12px" }}>Ключевые направления работы:</p>
-                  <div style={{ marginBottom: 24 }}><ItemList items={TIER3_DIRECTIONS} /></div>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600,
-                    letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "var(--stone-400)", margin: "0 0 12px" }}>Что вы получите:</p>
-                  <div style={{ marginBottom: 20 }}><ItemList items={TIER3_RESULTS} arrow="→" /></div>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 13,
-                    color: textSecondary, margin: "8px 0 0", lineHeight: 1.5 }}>
-                    Регулярные стратегические встречи · персональные консультации · поддержка между встречами · доступ к профессиональной сети · начало с личной встречи
-                  </p>
-                </React.Fragment>
-              )}
-            </TierCard>
-
-          </div>
+        <div style={{ maxWidth: "60ch", marginBottom: 52 }}>
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.7,
+            color: "var(--ink-800)", margin: 0 }}>
+            У всех разные цели, опыт и уровень подготовки. Кому-то достаточно получить систему и внедрять её самостоятельно. Кто-то хочет пройти первый объект под руководством эксперта. А кто-то ищет стратегического партнёра для создания или масштабирования бизнеса.
+          </p>
         </div>
-      </section>
-    </React.Fragment>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+          gap: 0, alignItems: "start" }} className="kit-tarify-grid">
+
+          {/* Tier 1 */}
+          <div style={{ background: "var(--paper)", border: "1px solid var(--sand-300)",
+            padding: "36px 32px", display: "flex", flexDirection: "column" }}>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 600,
+              letterSpacing: "0.16em", textTransform: "uppercase",
+              color: "var(--stone-400)", margin: "0 0 12px" }}>Формат 01</p>
+            <h2 style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 20,
+              lineHeight: 1.2, color: "var(--ink-900)", margin: "0 0 16px" }}>
+              Самостоятельное изучение
+            </h2>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.65,
+              color: "var(--stone-500)", margin: 0 }}>
+              Полная система создания и развития строительного бизнеса для тех, кто готов самостоятельно изучать материалы и внедрять их в работу.
+            </p>
+            {open1 && (
+              <React.Fragment>
+                <Label>В программе:</Label>
+                <ItemList items={TIER1_ITEMS} />
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: 12.5,
+                  color: "var(--stone-400)", margin: "14px 0 0", lineHeight: 1.5 }}>
+                  95 модулей · 297 уроков · более 1 000 страниц · регламенты · договоры · шаблоны · чек-листы
+                </p>
+              </React.Fragment>
+            )}
+            <ToggleBtn open={open1} setOpen={setOpen1} />
+            <div style={{ borderTop: "1px solid var(--sand-300)", marginTop: "auto", paddingTop: 24, marginTop: 24 }}>
+              <p style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 26,
+                color: "var(--ink-900)", margin: "0 0 16px" }}>587 $</p>
+              <a href="#contact"><Button variant="accent" size="md">Получить доступ</Button></a>
+            </div>
+          </div>
+
+          {/* Tier 2 — featured */}
+          <div style={{ background: "var(--ink-900)", border: "1px solid var(--ink-900)",
+            padding: "36px 32px", display: "flex", flexDirection: "column",
+            marginTop: -12, marginBottom: -12 }}>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 600,
+              letterSpacing: "0.16em", textTransform: "uppercase",
+              color: "rgba(247,242,233,0.4)", margin: "0 0 12px" }}>Формат 02 — Основной</p>
+            <h2 style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 20,
+              lineHeight: 1.2, color: "var(--cream-50)", margin: "0 0 16px" }}>
+              Первый объект под руководством эксперта
+            </h2>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.65,
+              color: "rgba(247,242,233,0.65)", margin: 0 }}>
+              Для тех, кто хочет пройти первый проект не в одиночку — рядом с человеком, который уже более 20 лет работает в сфере недвижимости, строительства и управления проектами.
+            </p>
+            {open2 && (
+              <React.Fragment>
+                <Label dark>Мы вместе проходим:</Label>
+                <ItemList items={TIER2_PATH} dark />
+                <Label dark>Ваш результат:</Label>
+                <ItemList items={TIER2_RESULTS} dark arrow="→" />
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: 12.5,
+                  color: "rgba(247,242,233,0.35)", margin: "14px 0 0", lineHeight: 1.5 }}>
+                  5 месяцев · закрытый чат · Zoom-встречи · доступ к партнёрской сети · после предварительного интервью
+                </p>
+              </React.Fragment>
+            )}
+            <ToggleBtn open={open2} setOpen={setOpen2} dark />
+            <div style={{ borderTop: "1px solid rgba(247,242,233,0.15)", marginTop: 24, paddingTop: 24 }}>
+              <p style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 26,
+                color: "var(--cream-50)", margin: "0 0 6px" }}>от 3 870 $</p>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: 12.5,
+                color: "rgba(247,242,233,0.4)", margin: "0 0 16px", lineHeight: 1.5 }}>
+                Финальная стоимость определяется после предварительного интервью
+              </p>
+              <a href="#contact">
+                <Button variant="outline-on-dark" size="md">Заполнить анкету</Button>
+              </a>
+            </div>
+          </div>
+
+          {/* Tier 3 */}
+          <div style={{ background: "var(--paper)", border: "1px solid var(--sand-300)",
+            padding: "36px 32px", display: "flex", flexDirection: "column" }}>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 600,
+              letterSpacing: "0.16em", textTransform: "uppercase",
+              color: "var(--stone-400)", margin: "0 0 12px" }}>Формат 03</p>
+            <h2 style={{ fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 20,
+              lineHeight: 1.2, color: "var(--ink-900)", margin: "0 0 16px" }}>
+              Стратегическое партнёрство
+            </h2>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.65,
+              color: "var(--stone-500)", margin: 0 }}>
+              Для предпринимателей и инвесторов, которым необходим стратегический партнёр, способный видеть ситуацию шире и помогать принимать решения в ключевые моменты.
+            </p>
+            {open3 && (
+              <React.Fragment>
+                <Label>Ключевые направления:</Label>
+                <ItemList items={TIER3_DIRECTIONS} />
+                <Label>Что вы получите:</Label>
+                <ItemList items={TIER3_RESULTS} arrow="→" />
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: 12.5,
+                  color: "var(--stone-400)", margin: "14px 0 0", lineHeight: 1.5 }}>
+                  Регулярные стратегические встречи · персональные консультации · доступ к профессиональной сети · начало с личной встречи
+                </p>
+              </React.Fragment>
+            )}
+            <ToggleBtn open={open3} setOpen={setOpen3} />
+            <div style={{ borderTop: "1px solid var(--sand-300)", marginTop: 24, paddingTop: 24 }}>
+              <p style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 26,
+                color: "var(--ink-900)", margin: "0 0 6px" }}>от 15 000 $</p>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: 12.5,
+                color: "var(--stone-400)", margin: "0 0 16px", lineHeight: 1.5 }}>
+                Финальные условия определяются после личной стратегической встречи
+              </p>
+              <a href="#contact"><Button variant="accent" size="md">Заполнить анкету</Button></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 }
 
