@@ -27,6 +27,12 @@ const CONTENT = {
     img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2000&q=80",
     back: "sobstvennikam.html",
   },
+  programma: {
+    label: "Программа",
+    heading: "Что вы получите в результате",
+    img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000&q=80",
+    back: "biznes.html",
+  },
   tarify: {
     label: "Форматы участия",
     heading: "Выберите свой путь в строительном бизнесе",
